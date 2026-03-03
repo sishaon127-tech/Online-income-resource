@@ -22,183 +22,166 @@
 
     <style>
         :root { --primary: #2563eb; --dark: #0f172a; --light: #f2f5f9; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--light); color: #222; scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: #222; scroll-behavior: smooth; }
+        .hero { background: linear-gradient(135deg, var(--dark), #1e293b); color: white; text-align: center; padding: 70px 20px; }
+        .hero h1 { font-size: 36px; margin-bottom: 15px; }
+        .section { max-width: 1100px; margin: auto; padding: 60px 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; transition: 0.3s; text-align: center; }
+        .card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--primary); }
+        .article { display: none; margin-top: 40px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .cta { display: inline-block; margin-top: 20px; background: var(--primary); color: white; padding: 14px 28px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; border: none; }
+        .download-btn { display: none; background: #059669; margin-left: 10px; }
         
         /* Loading Overlay */
-        #loading-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.95); color: white; z-index: 10000;
-            flex-direction: column; align-items: center; justify-content: center; text-align: center;
-        }
-        .spinner { border: 4px solid rgba(255,255,255,0.1); border-left-color: #fff; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        #loader { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.9); z-index: 9999; color: white; text-align: center; padding-top: 20%; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: auto; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .hero { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; text-align: center; padding: 80px 20px; }
-        .section { max-width: 1100px; margin: auto; padding: 60px 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 30px; }
-        
-        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; text-align: center; }
-        .card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--primary); }
-
-        .article { display: none; margin-top: 40px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-left: 5px solid var(--primary); }
-        
-        .cta { display: inline-block; margin-top: 20px; background: var(--primary); color: white; padding: 14px 28px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; border: none; }
-        .pdf-btn { display: none; background: #10b981; margin-left: 10px; }
-
-        /* Testimonials Section */
+        /* Testimonials */
         .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
-        .t-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .t-header { display: flex; align-items: center; margin-bottom: 15px; }
-        .t-avatar { width: 50px; height: 50px; border-radius: 50%; background: #ddd; margin-right: 15px; object-fit: cover; }
-        .t-info h4 { margin: 0; font-size: 16px; }
-        .t-info span { font-size: 12px; color: #666; }
+        .t-card { background: #fff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--primary); font-style: italic; }
+        .t-user { display: flex; align-items: center; margin-top: 15px; font-style: normal; }
+        .t-user img { width: 45px; height: 45px; border-radius: 50%; margin-right: 10px; background: #ddd; }
 
-        /* Tools Section */
-        .tools-list { background: #fff; padding: 20px; border-radius: 10px; margin-top: 20px; }
-        .tool-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1s solid #eee; }
-        .tool-link { color: var(--primary); text-decoration: none; font-weight: bold; }
-
-        .trust { background: #e2e8f0; padding: 60px 20px; text-align: center; }
-        .footer { background: var(--dark); color: white; text-align: center; padding: 30px; }
+        .trust { background: #e2e8f0; padding: 40px 20px; text-align: center; }
+        .footer { background: var(--dark); color: white; text-align: center; padding: 25px; }
     </style>
 </head>
 <body>
 
-<div id="loading-overlay">
+<div id="loader">
     <div class="spinner"></div>
-    <h3>Checking for available resources in your region...</h3>
-    <p>Please wait 5 seconds while we verify your access.</p>
+    <h3 id="loader-text">Checking for available resources in your region...</h3>
+    <p>Please wait 5 seconds.</p>
 </div>
 
 <div class="hero">
-    <h1>Real Online Income Systems 2026</h1>
-    <p>Verified resources for Affiliate, CPA, Remote Work & Passive Income.</p>
+    <h1>Real Online Income Systems</h1>
+    <p>Educational resources for Affiliate, CPA, Remote Work & Passive Income. Built for serious learners in US, UK, Canada & Germany.</p>
 </div>
 
 <div class="section">
     <h2>Select Your Focus Area</h2>
     <div class="grid">
-        <div class="card" onclick="openArticle('affiliate')"><h3>Affiliate Marketing</h3><p>Build commission streams.</p></div>
-        <div class="card" onclick="openArticle('cpa')"><h3>CPA Marketing</h3><p>Earn per action systems.</p></div>
-        <div class="card" onclick="openArticle('remote')"><h3>Remote Jobs</h3><p>Global work opportunities.</p></div>
-        <div class="card" onclick="openArticle('passive')"><h3>Passive Income</h3><p>Scalable digital assets.</p></div>
+        <div class="card" onclick="openArticle('affiliate')"><h3>Affiliate Marketing</h3><p>Build commission-based digital income streams.</p></div>
+        <div class="card" onclick="openArticle('cpa')"><h3>CPA Marketing</h3><p>Earn per action with smart traffic systems.</p></div>
+        <div class="card" onclick="openArticle('remote')"><h3>Remote Jobs</h3><p>Access legitimate global work opportunities.</p></div>
+        <div class="card" onclick="openArticle('passive')"><h3>Passive Income</h3><p>Create digital assets that scale.</p></div>
     </div>
 
     <div id="affiliate" class="article">
-        <h3>Affiliate Marketing Blueprint</h3>
-        <p>Start with high-ticket or recurring offers for stability.</p>
-        <ul><li>Niche: Software/Health</li><li>Strategy: Comparison Blogs</li></ul>
-        <button onclick="handleConversion('Affiliate')" class="cta">Explore Recommended Platforms</button>
-        <a id="pdf-Affiliate" href="YOUR_PDF_LINK" class="cta pdf-btn">Download Affiliate PDF Guide</a>
+        <h3>Affiliate Marketing Blueprint 2026</h3>
+        <p>Affiliate marketing works best when you combine content, email capture and intent-driven traffic.</p>
+        <ul>
+            <li>Pick 1 micro-niche</li>
+            <li>Capture emails & Promote high EPC offers</li>
+        </ul>
+        <button onclick="handleAction('affiliate_ad', 'affiliate_dl')" class="cta">Explore Recommended Platforms</button>
+        <a id="affiliate_dl" href="YOUR_PDF_LINK" class="cta download-btn">Download Strategy PDF</a>
+        
+        <h4>Essential Tools:</h4>
+        <p><a href="https://associates.amazon.com" target="_blank">Amazon Associates</a> | <a href="https://www.cj.com" target="_blank">CJ Affiliate</a> | <a href="https://canva.com" target="_blank">Canva (Design)</a></p>
     </div>
 
     <div id="cpa" class="article">
         <h3>CPA Marketing System</h3>
-        <p>Master Tier-1 traffic for maximum payouts.</p>
-        <button onclick="handleConversion('CPA')" class="cta">View CPA Opportunities</button>
-        <a id="pdf-CPA" href="YOUR_PDF_LINK" class="cta pdf-btn">Download CPA Checklist</a>
+        <p>Earn when a user completes a simple action like email submit or app install.</p>
+        <button onclick="handleAction('cpa_ad', 'cpa_dl')" class="cta">View CPA Opportunities</button>
+        <a id="cpa_dl" href="YOUR_CPA_PDF_LINK" class="cta download-btn">Download CPA Checklist</a>
+        
+        <h4>Essential Tools:</h4>
+        <p><a href="https://www.cpagrip.com" target="_blank">CPAGrip</a> | <a href="https://www.maxbounty.com" target="_blank">MaxBounty</a> | <a href="https://trends.google.com" target="_blank">Google Trends</a></p>
     </div>
 
     <div id="remote" class="article">
         <h3>Remote Job Strategy</h3>
-        <p>Get hired by US/UK companies from anywhere.</p>
-        <button onclick="handleConversion('Remote')" class="cta">Find Remote Resources</button>
-        <a id="pdf-Remote" href="YOUR_PDF_LINK" class="cta pdf-btn">Download Resume Template</a>
+        <p>Skills matter more than location. Target US/UK markets.</p>
+        <button onclick="handleAction('remote_ad', 'remote_dl')" class="cta">Find Remote Resources</button>
+        <a id="remote_dl" href="YOUR_REMOTE_PDF_LINK" class="cta download-btn">Download Job List</a>
+        
+        <h4>Essential Tools:</h4>
+        <p><a href="https://www.linkedin.com" target="_blank">LinkedIn</a> | <a href="https://www.upwork.com" target="_blank">Upwork</a> | <a href="https://remotive.com" target="_blank">Remotive</a></p>
     </div>
 
     <div id="passive" class="article">
         <h3>Passive Income Model</h3>
-        <p>Build once, earn forever using automated systems.</p>
-        <button onclick="handleConversion('Passive')" class="cta">See Tools & Platforms</button>
-        <a id="pdf-Passive" href="YOUR_PDF_LINK" class="cta pdf-btn">Download Automation Map</a>
+        <p>Build assets that scale. Focus on automation.</p>
+        <button onclick="handleAction('passive_ad', 'passive_dl')" class="cta">See Tools & Platforms</button>
+        <a id="passive_dl" href="YOUR_PASSIVE_PDF_LINK" class="cta download-btn">Download Automation Guide</a>
+        
+        <h4>Essential Tools:</h4>
+        <p><a href="https://wordpress.org" target="_blank">WordPress</a> | <a href="https://www.mailerlite.com" target="_blank">MailerLite</a> | <a href="https://gumroad.com" target="_blank">Gumroad</a></p>
     </div>
 </div>
 
-<div class="section" style="background: #fdfdfd;">
-    <h2 style="text-align: center;">Verified Success Stories</h2>
+<div class="section" style="background: #fff; border-radius: 15px;">
+    <h2 style="text-align:center">Success Stories</h2>
     <div class="testimonial-grid">
-        <div class="t-card">
-            <div class="t-header">
-                <img src="https://i.pravatar.cc/150?u=1" class="t-avatar" alt="User">
-                <div class="t-info"><h4>James Wilson</h4><span>Remote Developer, UK</span></div>
-            </div>
-            <p>"The remote job resources here are authentic. Secured my first $3k/mo role after following the resume guide."</p>
+        <div class="t-card">"The CPA checklist changed my approach to Tier-1 traffic. Highly recommended!"
+            <div class="t-user"><img src="https://i.pravatar.cc/150?u=1" alt="User"> <b>Sarah J. (USA)</b></div>
         </div>
-        <div class="t-card">
-            <div class="t-header">
-                <img src="https://i.pravatar.cc/150?u=2" class="t-avatar" alt="User">
-                <div class="t-info"><h4>Elena Rodriguez</h4><span>CPA Marketer, Spain</span></div>
-            </div>
-            <p>"Unlike other hype sites, this platform teaches the actual system. My conversion rates doubled in 3 weeks."</p>
+        <div class="t-card">"Finally a site that explains Affiliate systems without the fake screenshots."
+            <div class="t-user"><img src="https://i.pravatar.cc/150?u=2" alt="User"> <b>Markus W. (Germany)</b></div>
         </div>
-        <div class="t-card">
-            <div class="t-header">
-                <img src="https://i.pravatar.cc/150?u=3" class="t-avatar" alt="User">
-                <div class="t-info"><h4>Mohammad Al-Fayed</h4><span>Affiliate Marketer, UAE</span></div>
-            </div>
-            <p>"High-quality blueprints. The affiliate tools suggested are essential for anyone starting in 2026."</p>
+        <div class="t-card">"I landed my first remote data entry job using their LinkedIn optimization guide."
+            <div class="t-user"><img src="https://i.pravatar.cc/150?u=3" alt="User"> <b>Elena R. (Canada)</b></div>
+        </div>
+        <div class="t-card">"The passive income tools mentioned here are 100% legitimate and helpful."
+            <div class="t-user"><img src="https://i.pravatar.cc/150?u=4" alt="User"> <b>David L. (UK)</b></div>
+        </div>
+        <div class="t-card">"Clear, concise, and professional. The best resource for serious beginners."
+            <div class="t-user"><img src="https://i.pravatar.cc/150?u=5" alt="User"> <b>Sophie T. (Australia)</b></div>
+        </div>
+        <div class="t-card">"Simple steps that actually work. No hype, just pure value."
+            <div class="t-user"><img src="https://i.pravatar.cc/150?u=6" alt="User"> <b>James K. (USA)</b></div>
         </div>
     </div>
 </div>
 
 <div class="section">
-    <h2>Essential Tools & Resources</h2>
-    <div class="grid">
-        <div class="card">
-            <h4>For Affiliates</h4>
-            <div class="tools-list">
-                <div class="tool-item"><span>Amazon Associates</span><a href="https://affiliate-program.amazon.com/" class="tool-link">Join</a></div>
-                <div class="tool-item"><span>ClickBank</span><a href="#" class="tool-link">Explore</a></div>
-            </div>
-        </div>
-        <div class="card">
-            <h4>For CPA/Jobs</h4>
-            <div class="tools-list">
-                <div class="tool-item"><span>LinkedIn Jobs</span><a href="#" class="tool-link">Visit</a></div>
-                <div class="tool-item"><span>Canva (Design)</span><a href="#" class="tool-link">Open</a></div>
-            </div>
-        </div>
-    </div>
+    <h2>Free Beginner Checklist</h2>
+    <p>Get a practical CPA starter checklist for Tier-1 countries.</p>
+    <form action="YOUR_EMAIL_FORM_LINK" method="post">
+        <input type="email" name="EMAIL" placeholder="Enter your email" style="padding:12px; width:250px; border-radius:5px; border:1px solid #ccc;" required>
+        <button type="submit" class="cta" style="margin-top:0">Download Free Guide</button>
+    </form>
 </div>
 
 <div class="trust">
     <h3>Our Philosophy</h3>
-    <p>We strictly deny scams. Our focus is on long-term systems and real skills. 100% Transparency.</p>
+    <p>No hype. No fake income screenshots. We focus on systems, testing and long-term growth.</p>
 </div>
 
-<div class="footer">
-    © 2026 Global Income Systems | Educational Purpose Only
-</div>
+<div class="footer">© 2026 Global Income Systems | Educational Purpose Only</div>
 
 <script>
-    // Smooth Scroll & Show Article
     function openArticle(id){
         var a = document.getElementsByClassName("article");
-        for(var i=0; i<a.length; i++) { a[i].style.display = "none"; }
+        for(var i=0; i<a.length; i++){ a[i].style.display = "none"; }
         var target = document.getElementById(id);
         target.style.display = "block";
-        window.scrollTo({ top: target.offsetTop - 50, behavior: 'smooth' });
+        window.scrollTo({ top: target.offsetTop - 20, behavior: 'smooth' });
     }
 
-    // Logic for Adsterra + PDF Download
-    function handleConversion(type) {
-        trackClick(type + '_Click');
-        const overlay = document.getElementById('loading-overlay');
-        overlay.style.display = 'flex';
-
-        // ১. ৫ সেকেন্ডের জন্য লোডিং স্ক্রিন
-        setTimeout(function() {
-            overlay.style.display = 'none';
-            
-            // ২. অ্যাডস্টারা ডিরেক্ট লিঙ্ক ওপেন (নতুন ট্যাব)
-            // 🔴 এখানে YOUR_ADSTERRA_LINK এর জায়গায় আপনার লিঙ্ক বসান
-            window.open('YOUR_ADSTERRA_LINK', '_blank');
-
-            // ৩. মূল ওয়েবসাইটে PDF ডাউনলোড বাটনটি দৃশ্যমান করা
-            document.getElementById('pdf-' + type).style.display = 'inline-block';
-        }, 5000);
+    function handleAction(trackLabel, downloadBtnId) {
+        document.getElementById('loader').style.display = 'block';
+        trackClick(trackLabel);
+        
+        // 🔴 এখানে আপনার Adsterra Direct Link বসান
+        var adsterraLink = "YOUR_ADSTERRA_DIRECT_LINK_HERE";
+        
+        setTimeout(function(){
+            document.getElementById('loader').style.display = 'none';
+            // নতুন ট্যাবে অ্যাড ওপেন হবে
+            window.open(adsterraLink, '_blank');
+            // মূল পেজে ডাউনলোড বাটন দেখাবে
+            document.getElementById(downloadBtnId).style.display = 'inline-block';
+        }, 5000); // ৫ সেকেন্ড লোডিং
     }
 </script>
 
 </body>
-</html>
+    </html>
+    
