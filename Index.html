@@ -127,7 +127,7 @@
         
         setTimeout(function(){
             document.getElementById('loader').style.display = 'none';
-            window.open(adUrl, '_blank'); 
+            window.location.href = adUrl;
             document.getElementById(downloadBtnId).style.display = 'inline-block';
         }, 5000);
     }
