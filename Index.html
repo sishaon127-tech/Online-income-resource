@@ -22,81 +22,69 @@
 
     <style>
         :root { --primary: #2563eb; --dark: #0f172a; --light: #f2f5f9; --success: #059669; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: #222; scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: #222; scroll-behavior: smooth; }
         
-        /* Fixed Mobile View: Navbar scrollable and full-width */
-        .navbar { position: sticky; top: 0; background: var(--dark); padding: 15px 10px; display: flex; justify-content: center; gap: 15px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); flex-wrap: wrap; width: 100%; box-sizing: border-box; }
-        .navbar a { color: white; text-decoration: none; font-weight: 600; font-size: 12px; letter-spacing: 0.5px; transition: 0.3s; white-space: nowrap; }
+        /* Premium Navigation Bar */
+        .navbar { position: sticky; top: 0; background: var(--dark); padding: 15px 20px; display: flex; justify-content: center; gap: 25px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .navbar a { color: white; text-decoration: none; font-weight: 600; font-size: 13px; letter-spacing: 1px; transition: 0.3s; }
         .navbar a:hover { color: var(--primary); }
 
-        .hero { background: linear-gradient(135deg, var(--dark), #1e293b); color: white; text-align: center; padding: 60px 20px; width: 100%; box-sizing: border-box; }
-        .hero h1 { font-size: clamp(24px, 8vw, 38px); margin-bottom: 15px; font-weight: 800; line-height: 1.2; }
-        .hero p { font-size: clamp(14px, 4vw, 16px); max-width: 800px; margin: auto; opacity: 0.9; }
-
-        .section { max-width: 1100px; margin: auto; padding: 40px 15px; width: 100%; box-sizing: border-box; }
-        h2 { font-size: clamp(20px, 6vw, 28px); text-align: center; margin-bottom: 30px; }
+        .hero { background: linear-gradient(135deg, var(--dark), #1e293b); color: white; text-align: center; padding: 80px 20px; }
+        .hero h1 { font-size: 38px; margin-bottom: 15px; font-weight: 800; }
+        .section { max-width: 1100px; margin: auto; padding: 60px 20px; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; transition: 0.3s; text-align: center; border-bottom: 0px solid var(--primary); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; transition: 0.3s; text-align: center; border-bottom: 0px solid var(--primary); }
         .card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--primary); }
         
-        .article { display: none; margin-top: 40px; background: white; padding: clamp(20px, 5vw, 40px); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); animation: fadeIn 0.5s; }
+        .article { display: none; margin-top: 40px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .cta { display: inline-block; margin-top: 20px; background: var(--primary); color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; border: none; font-size: 14px; width: 100%; max-width: 250px; }
-        .download-btn { display: none; background: var(--success); margin-top: 10px; }
+        .cta { display: inline-block; margin-top: 20px; background: var(--primary); color: white; padding: 14px 28px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; border: none; font-size: 15px; }
+        .download-btn { display: none; background: var(--success); margin-left: 10px; }
 
-        /* Mobile Responsive Tools Hub */
-        .tools-master-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 30px; }
-        .tools-box { background: #fff; padding: 20px; border-radius: 12px; border-top: 4px solid var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .tools-box h3 { font-size: 17px; margin-bottom: 15px; color: var(--dark); border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        /* Tools Hub Styling */
+        .tools-master-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 30px; }
+        .tools-box { background: #fff; padding: 25px; border-radius: 12px; border-top: 4px solid var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .tools-box h3 { font-size: 18px; margin-bottom: 15px; color: var(--dark); border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .tool-list { list-style: none; padding: 0; margin: 0; max-height: 350px; overflow-y: auto; }
-        .tool-list li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f9f9f9; font-size: 13px; align-items: center; }
-        .tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
+        .tool-list li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f9f9f9; font-size: 13px; }
+        .tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
         .free { background: #dcfce7; color: #166534; }
         .paid { background: #fee2e2; color: #991b1b; }
 
-        /* Success Story Slider */
-        .slider-wrapper { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-        .case-slide { min-width: 280px; flex: 1; background: white; padding: 25px; border-radius: 12px; scroll-snap-align: start; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--primary); }
-        .case-slide h4 { margin: 10px 0; color: var(--dark); font-size: 16px; }
-        .case-slide p { font-size: 14px; line-height: 1.5; color: #444; }
+        /* Realistic Case Study Slider */
+        .slider-wrapper { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 20px; scroll-snap-type: x mandatory; }
+        .case-slide { min-width: 320px; background: white; padding: 30px; border-radius: 12px; scroll-snap-align: start; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--primary); }
+        .case-slide h4 { margin-top: 0; color: var(--dark); }
 
         /* Calculator Section */
-        .calc-container { background: white; padding: 30px 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 500px; margin: 20px auto; text-align: center; }
-        .calc-container input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        .calc-container { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 500px; margin: 40px auto; text-align: center; }
+        .calc-container input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
 
-        #loader { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); z-index: 9999; color: white; text-align: center; padding-top: 30vh; }
+        #loader { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.9); z-index: 9999; color: white; text-align: center; padding-top: 20%; }
         .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: auto; margin-bottom: 20px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Realistic Reviews */
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
-        .t-card { background: #fff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--primary); font-style: italic; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
+        .t-card { background: #fff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--primary); font-style: italic; }
         .t-user { display: flex; align-items: center; margin-top: 15px; font-style: normal; }
-        .t-user img { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; object-fit: cover; }
+        .t-user img { width: 45px; height: 45px; border-radius: 50%; margin-right: 10px; background: #ddd; }
 
-        .trust { background: #e2e8f0; padding: 40px 20px; text-align: center; margin-top: 40px; }
-        .footer { background: var(--dark); color: white; text-align: center; padding: 25px; font-size: 13px; }
-
-        /* Desktop Adjustments */
-        @media (min-width: 768px) {
-            .navbar a { font-size: 14px; gap: 25px; }
-            .cta { width: auto; }
-            .case-slide { min-width: 320px; }
-        }
+        .trust { background: #e2e8f0; padding: 40px 20px; text-align: center; }
+        .footer { background: var(--dark); color: white; text-align: center; padding: 25px; }
     </style>
 </head>
 <body>
 
 <div id="loader">
     <div class="spinner"></div>
-    <h3 id="loader-text">Resource validation in progress...</h3>
+    <h3 id="loader-text">Checking for available resources...</h3>
     <p>Please wait 5 seconds.</p>
 </div>
 
 <nav class="navbar">
-    <a href="#" onclick="location.reload()">HOME</a>
+    <a href="#">HOME</a>
     <a href="#focus-area">SYSTEMS</a>
     <a href="#tools">TOOLS</a>
     <a href="#case-studies">CASE STUDIES</a>
@@ -119,52 +107,63 @@
 
     <div id="affiliate" class="article">
         <h3>Affiliate Marketing Blueprint 2026</h3>
-        <p>Affiliate marketing is a model where you earn commissions without creating your own product. Here are 7 core realistic principles:</p>
-        <ul style="padding-left: 20px; font-size: 14px; line-height: 1.8;">
-            <li><strong>1. Select a Specific Micro-Niche:</strong> Focus on trust building.</li>
-            <li><strong>2. Use Intent-Driven Traffic:</strong> Target active searchers.</li>
-            <li><strong>3. Trust First, Link Later:</strong> Value-first approach.</li>
-            <li><strong>4. Build an Email List:</strong> Retargeting is key.</li>
-            <li><strong>5. High EPC Offers:</strong> Focus on quality commissions.</li>
-            <li><strong>6. Comparison Content:</strong> High conversion strategy.</li>
-            <li><strong>7. Weekly Optimization:</strong> Data-driven decisions.</li>
+        <p>Affiliate marketing is a model where you earn commissions without creating your own product. However, it only works when a proper system is followed. Here are 7 core realistic principles:</p>
+        <ul>
+            <li><strong>1. Select a Specific Micro-Niche:</strong> Focus on something specific to build faster trust.</li>
+            <li><strong>2. Use Intent-Driven Traffic:</strong> Target users already searching for solutions.</li>
+            <li><strong>3. Trust First, Link Later:</strong> Provide value before sharing links.</li>
+            <li><strong>4. Build an Email List:</strong> Re-engagement is key to 60% of income.</li>
+            <li><strong>5. Choose High EPC Offers:</strong> Focus on quality commissions.</li>
+            <li><strong>6. Utilize Comparison Content:</strong> "A vs B" content converts best.</li>
+            <li><strong>7. Weekly Optimization:</strong> Base decisions on data, not guesswork.</li>
         </ul>
         <button onclick="handleAction('https://www.effectivegatecpm.com/f8d0qvz8t?key=8d60e87344f7f94c6bd986c60a5933b1', 'Affiliate_Explore', 'affiliate_dl')" class="cta">Explore Recommended Platforms</button>
         <a id="affiliate_dl" href="#" class="cta download-btn">Download Strategy PDF</a>
     </div>
 
     <div id="cpa" class="article">
-        <h3>CPA Marketing System</h3>
-        <p>Earn commissions when a user completes a specific action (e.g., Email Submit, App Install).</p>
-        <ul style="padding-left: 20px; font-size: 14px; line-height: 1.8;">
-            <li><strong>1. Tier-1 GEOs:</strong> Focus on high-paying countries.</li>
-            <li><strong>2. Clean Pre-Landers:</strong> Use bridge pages for trust.</li>
-            <li><strong>3. Match Intent:</strong> Targeted traffic is better.</li>
-            <li><strong>4. Daily Tracking:</strong> Monitor every lead source.</li>
-            <li><strong>5. Simple Funnels:</strong> Keep the flow direct.</li>
+        <h3>CPA Marketing System (Performance Based Model)</h3>
+        <p>Earn commissions when a user completes a specific action (e.g., Email Submit, App Install, Trial Signup).</p>
+        <ul>
+            <li><strong>1. Focus on Tier-1 GEOs:</strong> US, UK, Canada, and Germany pay higher.</li>
+            <li><strong>2. Use Clean Pre-Landers:</strong> Use educational bridge pages.</li>
+            <li><strong>3. Match Offer with Intent:</strong> Device-specific targeting is crucial.</li>
+            <li><strong>4. Mandatory Daily Tracking:</strong> Know your conversion source.</li>
+            <li><strong>5. Use Simple Funnels:</strong> Keep the flow clean and direct.</li>
+            <li><strong>6. Implement Retargeting:</strong> Follow up with non-converters.</li>
+            <li><strong>7. Maintain a Test Budget:</strong> Test first, scale later.</li>
         </ul>
         <button onclick="handleAction('https://www.effectivegatecpm.com/cisnv6jbea?key=8e7149ae568a1ee105841a4d168e2af6', 'CPA_Opportunities', 'cpa_dl')" class="cta">View CPA Opportunities</button>
         <a id="cpa_dl" href="#" class="cta download-btn">Download CPA Checklist</a>
     </div>
 
     <div id="remote" class="article">
-        <h3>Remote Job Strategy</h3>
-        <p>Legitimate global work opportunities through specialized platforms.</p>
-        <ul style="padding-left: 20px; font-size: 14px; line-height: 1.8;">
-            <li><strong>1. Skill Positioning:</strong> Highlight your problem-solving skills.</li>
-            <li><strong>2. Global Portfolios:</strong> Use GitHub or Behance.</li>
-            <li><strong>3. LinkedIn Optimization:</strong> Get found by recruiters.</li>
+        <h3>Remote Job Strategy (Global Work Model)</h3>
+        <p>Access legitimate global work opportunities with these 7 effective tips:</p>
+        <ul>
+            <li><strong>1. Skill-Based Positioning:</strong> Solve specific problems.</li>
+            <li><strong>2. Build a Portfolio:</strong> Use GitHub or Behance to show work.</li>
+            <li><strong>3. Optimize LinkedIn:</strong> Make recruiters find you.</li>
+            <li><strong>4. Use Niche Job Boards:</strong> Avoid crowded general sites.</li>
+            <li><strong>5. Consistent Follow-Up:</strong> Be professional and persistent.</li>
+            <li><strong>6. Time Zone Advantages:</strong> Leverage global availability.</li>
+            <li><strong>7. Continuous Skill Upgrade:</strong> Learn AI and automation.</li>
         </ul>
         <button onclick="handleAction('https://www.effectivegatecpm.com/nah4i8000?key=c4f93d91270b32b1d511ce9aed8b3e02', 'Remote_Resources', 'remote_dl')" class="cta">Find Remote Resources</button>
         <a id="remote_dl" href="#" class="cta download-btn">Download Job List</a>
     </div>
 
     <div id="passive" class="article">
-        <h3>Passive Income Model</h3>
-        <p>Building automated systems for long-term income growth.</p>
-        <ul style="padding-left: 20px; font-size: 14px; line-height: 1.8;">
-            <li><strong>1. Digital Asset Building:</strong> Content that lasts years.</li>
-            <li><strong>2. Sequence Automation:</strong> Funnels that work 24/7.</li>
+        <h3>Passive Income Model (Long-Term Asset Building)</h3>
+        <p>Building systems to automate your income with these strategies:</p>
+        <ul>
+            <li><strong>1. Create Digital Assets:</strong> Blogs, YouTube, Email lists.</li>
+            <li><strong>2. Leverage Automation:</strong> Use email and funnel sequences.</li>
+            <li><strong>3. SEO-Focused Content:</strong> Build sustainable traffic.</li>
+            <li><strong>4. Choose Evergreen Niches:</strong> Finance, Health, Career.</li>
+            <li><strong>5. Multiple Income Streams:</strong> Diversify your assets.</li>
+            <li><strong>6. Master System Thinking:</strong> Every piece is part of the funnel.</li>
+            <li><strong>7. Patience + Consistency:</strong> Built to last, not built fast.</li>
         </ul>
         <button onclick="handleAction('https://www.effectivegatecpm.com/muthbx0fc7?key=aa66128842f9559777683843d5a539ed', 'Passive_Tools', 'passive_dl')" class="cta">See Tools & Platforms</button>
         <a id="passive_dl" href="#" class="cta download-btn">Download Automation Guide</a>
@@ -174,6 +173,7 @@
 <div class="section" id="tools" style="background: #fff; border-radius: 15px;">
     <h2 style="text-align:center">Professional Systems Tools Hub</h2>
     <div class="tools-master-grid">
+        
         <div class="tools-box">
             <h3>Affiliate Tools (30)</h3>
             <ul class="tool-list">
@@ -182,16 +182,31 @@
                 <li>Impact Radius <span class="tag free">Free</span></li>
                 <li>Ahrefs <span class="tag paid">Paid</span></li>
                 <li>Ubersuggest <span class="tag free">Free</span></li>
+                <li>ShareASale <span class="tag free">Free</span></li>
+                <li>CJ Affiliate <span class="tag free">Free</span></li>
                 <li>ClickBank <span class="tag free">Free</span></li>
                 <li>Digistore24 <span class="tag free">Free</span></li>
                 <li>RankMath SEO <span class="tag free">Free</span></li>
                 <li>ThirstyAffiliates <span class="tag free">Free</span></li>
                 <li>Pretty Links <span class="tag free">Free</span></li>
-                <li>CJ Affiliate <span class="tag free">Free</span></li>
-                <li>ShareASale <span class="tag free">Free</span></li>
                 <li>Geniuslink <span class="tag paid">Paid</span></li>
+                <li>BuzzSumo <span class="tag paid">Paid</span></li>
                 <li>SpyFu <span class="tag paid">Paid</span></li>
+                <li>Google Trends <span class="tag free">Free</span></li>
+                <li>Surfer SEO <span class="tag paid">Paid</span></li>
+                <li>AnswerThePublic <span class="tag free">Free</span></li>
+                <li>Rakuten Adv <span class="tag free">Free</span></li>
                 <li>PartnerStack <span class="tag free">Free</span></li>
+                <li>AffiliateWP <span class="tag paid">Paid</span></li>
+                <li>Voluum <span class="tag paid">Paid</span></li>
+                <li>Everflow <span class="tag paid">Paid</span></li>
+                <li>FatJoe <span class="tag paid">Paid</span></li>
+                <li>VCommission <span class="tag free">Free</span></li>
+                <li>Skimlinks <span class="tag free">Free</span></li>
+                <li>MarketHealth <span class="tag free">Free</span></li>
+                <li>GiddyUp <span class="tag free">Free</span></li>
+                <li>ClickMagick <span class="tag paid">Paid</span></li>
+                <li>ClickFunnels <span class="tag paid">Paid</span></li>
             </ul>
         </div>
 
@@ -200,19 +215,34 @@
             <ul class="tool-list">
                 <li>CPAGrip <span class="tag free">Free</span></li>
                 <li>MaxBounty <span class="tag free">Free</span></li>
+                <li>AdWorkMedia <span class="tag free">Free</span></li>
                 <li>OfferVault <span class="tag free">Free</span></li>
-                <li>BeMob Tracker <span class="tag free">Free</span></li>
+                <li>BeMob (Tracker) <span class="tag free">Free</span></li>
                 <li>AdsBridge <span class="tag paid">Paid</span></li>
+                <li>Binom <span class="tag paid">Paid</span></li>
                 <li>PropellerAds <span class="tag paid">Paid</span></li>
                 <li>Adplexity <span class="tag paid">Paid</span></li>
+                <li>Anstrex <span class="tag paid">Paid</span></li>
                 <li>PureLander <span class="tag paid">Paid</span></li>
                 <li>Instapage <span class="tag paid">Paid</span></li>
                 <li>ClickMagick <span class="tag paid">Paid</span></li>
+                <li>RedTrack <span class="tag paid">Paid</span></li>
+                <li>PeerFly <span class="tag free">Free</span></li>
                 <li>MyLead <span class="tag free">Free</span></li>
                 <li>OGAds <span class="tag free">Free</span></li>
                 <li>Landingi <span class="tag paid">Paid</span></li>
-                <li>Anstrex <span class="tag paid">Paid</span></li>
-                <li>AdWorkMedia <span class="tag free">Free</span></li>
+                <li>Swipe-Worthy <span class="tag free">Free</span></li>
+                <li>WhatRunsWhere <span class="tag paid">Paid</span></li>
+                <li>TrafficArmor <span class="tag paid">Paid</span></li>
+                <li>Magic Checker <span class="tag paid">Paid</span></li>
+                <li>Keitaro <span class="tag paid">Paid</span></li>
+                <li>Convertri <span class="tag paid">Paid</span></li>
+                <li>Leadbit <span class="tag free">Free</span></li>
+                <li>Admitad <span class="tag free">Free</span></li>
+                <li>Kimia <span class="tag free">Free</span></li>
+                <li>Wewe Media <span class="tag free">Free</span></li>
+                <li>Evadav <span class="tag paid">Paid</span></li>
+                <li>PushGround <span class="tag paid">Paid</span></li>
             </ul>
         </div>
 
@@ -222,49 +252,104 @@
                 <li>Redbubble <span class="tag free">Free</span></li>
                 <li>Teespring <span class="tag free">Free</span></li>
                 <li>KDP Amazon <span class="tag free">Free</span></li>
+                <li>Udemy <span class="tag free">Free</span></li>
                 <li>Gumroad <span class="tag free">Free</span></li>
                 <li>Canva <span class="tag free">Free</span></li>
+                <li>Etsy <span class="tag free">Free</span></li>
                 <li>Shopify <span class="tag paid">Paid</span></li>
+                <li>Printful <span class="tag free">Free</span></li>
                 <li>Midjourney <span class="tag paid">Paid</span></li>
+                <li>Jasper AI <span class="tag paid">Paid</span></li>
                 <li>ConvertKit <span class="tag free">Free</span></li>
                 <li>MailerLite <span class="tag free">Free</span></li>
-                <li>Systeme.io <span class="tag free">Free</span></li>
-                <li>Printful <span class="tag free">Free</span></li>
-                <li>Udemy <span class="tag free">Free</span></li>
-                <li>Kajabi <span class="tag paid">Paid</span></li>
+                <li>Teachable <span class="tag paid">Paid</span></li>
                 <li>Thinkific <span class="tag free">Free</span></li>
-                <li>Jasper AI <span class="tag paid">Paid</span></li>
+                <li>Fiverr <span class="tag free">Free</span></li>
+                <li>Systeme.io <span class="tag free">Free</span></li>
+                <li>Kajabi <span class="tag paid">Paid</span></li>
+                <li>Podia <span class="tag paid">Paid</span></li>
+                <li>Buffer <span class="tag free">Free</span></li>
+                <li>InVideo <span class="tag free">Free</span></li>
+                <li>Loom <span class="tag free">Free</span></li>
+                <li>Stripe <span class="tag free">Free</span></li>
+                <li>Substack <span class="tag free">Free</span></li>
+                <li>Patreon <span class="tag free">Free</span></li>
+                <li>Creative Market <span class="tag free">Free</span></li>
+                <li>Vecteezy <span class="tag free">Free</span></li>
+                <li>Envato Elements <span class="tag paid">Paid</span></li>
+                <li>TubeBuddy <span class="tag free">Free</span></li>
+                <li>VidIQ <span class="tag free">Free</span></li>
+                <li>Medium <span class="tag free">Free</span></li>
+                <li>Zazzle <span class="tag free">Free</span></li>
+                <li>Society6 <span class="tag free">Free</span></li>
+                <li>Teepublic <span class="tag free">Free</span></li>
+                <li>AWeber <span class="tag free">Free</span></li>
+                <li>GetResponse <span class="tag paid">Paid</span></li>
+                <li>Bluehost <span class="tag paid">Paid</span></li>
+                <li>SiteGround <span class="tag paid">Paid</span></li>
+                <li>Wix <span class="tag free">Free</span></li>
+                <li>Squarespace <span class="tag paid">Paid</span></li>
+            </ul>
+        </div>
+
+        <div class="tools-box" style="border-top-color: #f59e0b;">
+            <h3>Remote Job Tools (30)</h3>
+            <ul class="tool-list">
+                <li>LinkedIn <span class="tag free">Free</span></li>
+                <li>Indeed Remote <span class="tag free">Free</span></li>
+                <li>We Work Remotely <span class="tag free">Free</span></li>
+                <li>FlexJobs <span class="tag paid">Paid</span></li>
+                <li>Remote.co <span class="tag free">Free</span></li>
+                <li>Glassdoor <span class="tag free">Free</span></li>
+                <li>AngelList <span class="tag free">Free</span></li>
+                <li>Trello <span class="tag free">Free</span></li>
+                <li>Slack <span class="tag free">Free</span></li>
+                <li>Notion <span class="tag free">Free</span></li>
+                <li>Wise <span class="tag free">Free</span></li>
+                <li>Payoneer <span class="tag free">Free</span></li>
+                <li>GitHub <span class="tag free">Free</span></li>
+                <li>Behance <span class="tag free">Free</span></li>
+                <li>Upwork <span class="tag free">Free</span></li>
+                <li>Freelancer <span class="tag free">Free</span></li>
+                <li>Working Nomads <span class="tag free">Free</span></li>
+                <li>Remotive <span class="tag free">Free</span></li>
+                <li>SkipTheDrive <span class="tag free">Free</span></li>
+                <li>Virtual Vocations <span class="tag paid">Paid</span></li>
+                <li>Zoom <span class="tag free">Free</span></li>
+                <li>Asana <span class="tag free">Free</span></li>
+                <li>ClickUp <span class="tag free">Free</span></li>
+                <li>Toggle Track <span class="tag free">Free</span></li>
+                <li>Grammarly <span class="tag free">Free</span></li>
+                <li>Evernote <span class="tag free">Free</span></li>
+                <li>LastPass <span class="tag free">Free</span></li>
+                <li>Google Workspace <span class="tag free">Free</span></li>
+                <li>Dropbox <span class="tag free">Free</span></li>
+                <li>Calendly <span class="tag free">Free</span></li>
             </ul>
         </div>
     </div>
 </div>
 
 <div class="section" id="case-studies">
-    <h2>Realistic Success Case Studies</h2>
+    <h2>Weekly Realistic Success Stories</h2>
     <div class="slider-wrapper">
         <div class="case-slide">
             <span class="tag free" style="background:#2563eb; color:white">AFFILIATE</span>
-            <h4>$450/mo with Pinterest Traffic</h4>
-            <p>"I targeted the 'Home Office Setup' niche. By posting 3 high-quality pins daily, I started getting organic traffic. After 4 months, my Amazon affiliate income reached $450/mo."</p>
-            <small>📍 Updated: Jan 2026</small>
+            <h4>$450/Month with Pinterest Pins</h4>
+            <p>"I focused on the 'Home Decor' niche. Using Canva, I created 5 Pins daily linking to Amazon. No ads, just organic traffic growth over 4 months."</p>
+            <small>Verified Case: March 2026</small>
         </div>
         <div class="case-slide">
             <span class="tag free" style="background:#059669; color:white">CPA</span>
-            <h4>£120/week - Email Submit Offers</h4>
-            <p>"Using a simple bridge page and targeting specific UK Facebook communities with 'Freebie' offers, I achieved a 12% conversion rate on lead generation."</p>
-            <small>📍 Updated: Feb 2026</small>
+            <h4>£120/Week from UK Traffic</h4>
+            <p>"I used a simple bridge page for a 'Gift Card' CPA offer. Targeted UK Facebook groups with high-value content. Consistency led to 15 leads daily."</p>
+            <small>Verified Case: Feb 2026</small>
         </div>
         <div class="case-slide">
             <span class="tag free" style="background:#7c3aed; color:white">PASSIVE</span>
-            <h4>$65/mo - Amazon KDP Journals</h4>
-            <p>"Published 15 low-content journals (Notebooks) on KDP. It took 3 months for the algorithm to pick them up, but now it generates passive coffee money every month."</p>
-            <small>📍 Updated: March 2026</small>
-        </div>
-        <div class="case-slide">
-            <span class="tag free" style="background:#f59e0b; color:white">REMOTE</span>
-            <h4>$12/hr - Micro Tasks Success</h4>
-            <p>"Landed a data verification role through Remotive. By spending 4 hours a day, I consistently earn enough to cover my monthly bills from home."</p>
-            <small>📍 Updated: March 2026</small>
+            <h4>KDP Book Sales Momentum</h4>
+            <p>"Published 10 low-content journals on Amazon KDP. Initially earned $0, but after keyword optimization, it now generates $60/month passively."</p>
+            <small>Verified Case: Jan 2026</small>
         </div>
     </div>
 </div>
@@ -272,30 +357,30 @@
 <div class="section" id="calculator">
     <div class="calc-container">
         <h2>Profit Potential Analyzer</h2>
-        <p>Estimate your daily earnings potential.</p>
+        <p>Estimate your monthly revenue based on traffic stats.</p>
         <input type="number" id="traffic" placeholder="Estimated Daily Visitors (e.g. 500)">
-        <input type="number" id="conv" placeholder="Conv. Rate % (e.g. 2)">
-        <input type="number" id="payout" placeholder="Avg. Payout $ (e.g. 1.50)">
+        <input type="number" id="conv" placeholder="Conversion Rate % (e.g. 2)">
+        <input type="number" id="payout" placeholder="Avg. Payout per Lead $ (e.g. 1.80)">
         
         <button onclick="handleAction('https://www.effectivegatecpm.com/f8d0qvz8t?key=8d60e87344f7f94c6bd986c60a5933b1', 'Calc_Trigger', 'calc-result')" class="cta">Calculate My Potential</button>
         
-        <div id="calc-result" style="display:none; margin-top: 25px; font-weight: 800; color: var(--primary); font-size: 20px;">
-            Estimated Monthly Income: <span id="final-val">$0</span>
+        <div id="calc-result" style="display:none; margin-top: 25px; font-weight: 800; color: var(--primary); font-size: 22px; border-top: 1px dashed #ccc; padding-top: 15px;">
+            Estimated Monthly Revenue: <span id="final-val">$0</span>
         </div>
     </div>
 </div>
 
-<div class="section" id="reviews">
-    <h2 style="text-align:center">User Feedback</h2>
+<div class="section" id="about" style="background: #fff; border-radius: 15px;">
+    <h2 style="text-align:center">Success Stories</h2>
     <div class="testimonial-grid">
-        <div class="t-card">"The CPA checklist is pure gold for beginners. I didn't know about bridge pages until I read this."
-            <div class="t-user"><img src="https://i.pravatar.cc/150?u=12"> <b>Alex M. (UK)</b></div>
+        <div class="t-card">"The CPA checklist changed my approach to Tier-1 traffic. Highly recommended!"
+            <div class="t-user"><img src="https://i.pravatar.cc/150?u=1"> <b>Sarah J. (USA)</b></div>
         </div>
-        <div class="t-card">"Very clean interface and the tools list is actually updated for 2026. Highly helpful."
-            <div class="t-user"><img src="https://i.pravatar.cc/150?u=24"> <b>Sarah K. (USA)</b></div>
+        <div class="t-card">"Finally a site that explains Affiliate systems without the fake screenshots."
+            <div class="t-user"><img src="https://i.pravatar.cc/150?u=2"> <b>Markus W. (Germany)</b></div>
         </div>
-        <div class="t-card">"No fake screenshots here, just real systems. That's why I trust this platform."
-            <div class="t-user"><img src="https://i.pravatar.cc/150?u=35"> <b>David R. (Germany)</b></div>
+        <div class="t-card">"I landed my first remote data entry job using their LinkedIn guide."
+            <div class="t-user"><img src="https://i.pravatar.cc/150?u=3"> <b>Elena R. (Canada)</b></div>
         </div>
     </div>
 </div>
@@ -308,6 +393,7 @@
 <div class="footer">© 2026 Global Income Systems | Educational Purpose Only</div>
 
 <script>
+    // System Functions
     function openArticle(id){
         var a = document.getElementsByClassName("article");
         for(var i=0; i<a.length; i++){ a[i].style.display = "none"; }
@@ -316,10 +402,12 @@
         window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
     }
 
+    // Advanced Handle Action (Ad + Result Logic)
     function handleAction(adUrl, trackLabel, displayId) {
         document.getElementById('loader').style.display = 'block';
         trackClick(trackLabel);
         
+        // Income Calculation Logic
         if(trackLabel === 'Calc_Trigger') {
             let t = document.getElementById('traffic').value || 0;
             let c = document.getElementById('conv').value || 0;
@@ -330,6 +418,7 @@
 
         setTimeout(function(){
             document.getElementById('loader').style.display = 'none';
+            // Open Ad in same window for better conversion
             window.location.href = adUrl;
             if(displayId) {
                 document.getElementById(displayId).style.display = 'block';
@@ -340,4 +429,5 @@
 
 </body>
 </html>
+
 
