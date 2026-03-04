@@ -73,6 +73,45 @@
 
         .trust { background: #e2e8f0; padding: 40px 20px; text-align: center; }
         .footer { background: var(--dark); color: white; text-align: center; padding: 25px; }
+                  /* মোবাইল ভিউ অপ্টিমাইজেশন (Fix for Mobile) */
+        @media (max-width: 768px) {
+            .navbar { 
+                gap: 10px; 
+                padding: 10px 5px; 
+                overflow-x: auto; 
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+            }
+            .navbar a { 
+                font-size: 11px; 
+                white-space: nowrap; 
+                padding: 5px 8px;
+            }
+            .hero { padding: 50px 15px; }
+            .hero h1 { font-size: 28px; }
+            .hero p { font-size: 14px; }
+            
+            .section { padding: 40px 15px; }
+            
+            /* টুলস সেকশন মোবাইল ফিক্স */
+            .tools-master-grid {
+                grid-template-columns: 1fr; /* মোবাইলে এক কলামে দেখাবে */
+            }
+            .tools-box { padding: 15px; }
+            
+            /* কেস স্টাডি স্লাইডার ফিক্স */
+            .slider-wrapper {
+                gap: 15px;
+            }
+            .case-slide {
+                min-width: 85%; /* মোবাইলে কার্ডটি স্ক্রিনের ৮৫% জুড়ে থাকবে */
+            }
+            
+            .article { padding: 25px 20px; }
+            .cta { width: 100%; text-align: center; box-sizing: border-box; }
+            .download-btn { margin-left: 0; margin-top: 10px; }
+        }
+        
     </style>
 </head>
 <body>
